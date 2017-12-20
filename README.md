@@ -2,6 +2,8 @@
 
 Scorecard Automation project repo. This contains the SQL files, excel files, report configurations, and python scripts associated with this project.
 
+# What does this project  do?
+
 As of now these tools accomplish two things: updating SQL templates with team IDs, and splitting a large CSV file into separate csvs that are report-specific. This saves time when it comes to running multiple queries and dealing with large csv files. We used to run almost 100 queries but now we are down to 5 queries (10 for quarterly reports).
 
 The two pieces of code that need to be run are
