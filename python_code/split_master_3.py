@@ -7,19 +7,19 @@ import os
 import csv
 
 
-def split(config,current_file,raw_type,cadence):
+def split(config,current_file,raw_type,cadence): 
 	#define lists
-	unique_teams = []
-	team_ids = []
+	unique_teams = [] #unique teams from csv file
+	team_ids = [] #unique team ids from yaml
 	team_counter=0
-	#currentFile = raw_input('Enter name of file to split: ')
-	
-	#Change currentFile Manually
-	#current_file = 'france_cp.csv'
+
 	
 	#read file
-	
-	f = open(current_file,'rb')
+
+	excel_file_path = os.path.expanduser(r"~\automation_scorecard\excel_files")
+	write_file_path = os.path.expanduser(r"~\automation_scorecard\raw_data")
+
+	f = open((os.path.join(excel_file_path,current_file)),'rb')
 	file = csv.reader(f)
 	#next(f) #skip header files
 
@@ -28,21 +28,23 @@ def split(config,current_file,raw_type,cadence):
 		
 		if row[0] not in unique_teams:
 			unique_teams.append(row[0])
-	
-	#print unique_teams - upper portion of code works as intended
-	
+
 	
 	for k,v in config.iteritems():
 
 		team_ids = str(v).split(',') #yaml treats single id like an int so we want to cast it as a string
+		team_ids = set(team_ids)
 
-		f = open(current_file,'rb')
+		f = open((os.path.join(excel_file_path,current_file)),'rb')
 		file = csv.reader(f)
-		next(f)
-		#os.chdir("")
-		with open(k + "_" + raw_type + ".csv",'wb') as writefile:
-			writer = csv.writer(writefile, delimiter=',')
 		
+		#os.chdir("")
+		write_file_name = k + "_" + raw_type + ".csv"
+		
+
+		with open((os.path.join(write_file_path,write_file_name)),'wb') as writefile:
+			writer = csv.writer(writefile, delimiter=',')
+			
 			for line in file:
 				for team in team_ids:
 					if str(line[0])  == str(team):
@@ -52,7 +54,11 @@ def split(config,current_file,raw_type,cadence):
 			for line in file:
 				if str(line[0]) == str(team_ids):
 					writer.writerow(line)
+
+		print "The data for " + str((k + "_" + raw_type + ".csv")) + " has been generated"
+
 		f.close()
 				
+			
 
 	f.close()
