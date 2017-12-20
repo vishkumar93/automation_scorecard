@@ -10,8 +10,7 @@ import yaml
 
 team_id_list = []
 
-
-config_path = 'C:\Python27\configs'
+config_path = os.path.expanduser(r"~\automation_scorecard\configs")
 d = []
 for (dirpath, dirnames, filenames) in os.walk(config_path):
     d.extend(dirnames)
