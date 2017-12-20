@@ -5,11 +5,12 @@ from jinja2 import Environment, FileSystemLoader
 from get_team_ids import concatenate_team_ids
 import os
 
-sql_env = Environment(loader=FileSystemLoader('C:\Python27\sqlconfigs'))
+sql_file_path = os.path.expanduser(r"~\automation_scorecard\sql_templates")
+sql_env = Environment(loader=FileSystemLoader(sql_file_path))
 
 sql_files = ['camp_monthly','cp_monthly','p_monthly']
 
-config_path = 'C:\Python27\configs'
+config_path = os.path.expanduser(r"~\automation_scorecard\configs")
 d = []
 for (dirpath, dirnames, filenames) in os.walk(config_path):
     d.extend(dirnames)
@@ -26,7 +27,9 @@ def generate_sql_template(sql_env,sql_file,config_path,filenames):
 	return test_template.render(args_dict)
 
 def generate_all_sql_templates(sql_env,sql_file,config_path,filenames):
-	with open(sql_file + '.sql','w') as new_sql_file:
+	new_sql_config_path = os.path.expanduser(r"~\automation_scorecard\new_sql_configs")
+
+	with open(os.path.join(new_sql_config_path,(sql_file + '.sql')),'w') as new_sql_file:
 		update_sql_template = generate_sql_template(sql_env,sql_file,config_path,filenames)
 		new_sql_file.write(update_sql_template)
 
@@ -38,6 +41,6 @@ for sql_file in sql_files:
 
 
 # holy shit this fucking works :)
-#  test to see if above code works
+# test to see if above code works
 # table_sql = test_template.render(args_dict)
 # print table_sql
