@@ -10,5 +10,4 @@ The two pieces of code that need to be run are
 
 2) report_auto2 - this file uses split_master_3.py to allow the user to select a file from the "excel_files" folder, and split it according to all the reports in the "config" folder.
 
-
-
+Note - the Raw Data will constantly be changing. Technically there is no need to store CSV's in Git. I might change it so that raw data is generated on a local file but till it's not urgent.
