@@ -7,7 +7,8 @@ import yaml
 import os
 
 #store all config file names in list
-jobs_path = 'C:\Python27\configs'
+
+jobs_path = os.path.expanduser(r"~\automation_scorecard\configs")
 d = []
 for (dirpath, dirnames, filenames) in os.walk(jobs_path):
     d.extend(dirnames)
