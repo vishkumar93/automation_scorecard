@@ -28,7 +28,7 @@ cadence = raw_input('What is the cadence? (monthly = m, quarterly = q) :')
 
 for file in filenames:
 	scorecard_dict = parseYaml(file,jobs_path)
-	sm.split(scorecard_dict,current_file,raw_type,cadence)
+	sm.split(file,scorecard_dict,current_file,raw_type,cadence)
 
 '''
 Enter paramters of config into split_master function
