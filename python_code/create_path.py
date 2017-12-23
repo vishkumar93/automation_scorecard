@@ -1,13 +1,3 @@
-'''
-we need to find a way for each report configuation to create a folder for each set of raw data
-
-
-for config in configs:
-	create folder
-
-
-'''
-
 import os
 
 
@@ -32,6 +22,9 @@ def create_config_file_path(file):
 
 
 '''
+
+# Just a test function I used to develop our main function
+
 def create_config_file_path_test():
 	jobs_path = os.path.expanduser(r"~\automation_scorecard\configs")
 	d = []
