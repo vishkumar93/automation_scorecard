@@ -14,13 +14,12 @@ def read_csv_file(csv_file_name):
 	return raw_data,csv_file_name
 
 
-#in this second test we want the function to loop through 
-#assign existing tab to variable
 def function_to_export_data_testing():
 	#function constants
 	scorecard_template_path = os.path.expanduser(r"~\automation_scorecard\excel_files\scorecard_template.xlsx")
 	scorecard_finished_file_path = os.path.expanduser(r"~\automation_scorecard\excel_files")
 	raw_data_path = os.path.expanduser(r"~\automation_scorecard\raw_data")
+
 	directory_list = []
 
 
@@ -30,6 +29,7 @@ def function_to_export_data_testing():
 
 	for directory in directory_list:
 		raw_data_files_path = os.path.join(raw_data_path,directory)
+		#each directory of raw files, represents 1 report. For each of these directories, open an Excel template and do stuff to it
 		workbook = xw.Book(scorecard_template_path)
 
 		for (dirpath, dirnames, filenames) in os.walk(raw_data_files_path):
@@ -75,41 +75,10 @@ def function_to_export_data_testing():
 					row_num += 1
 					min_row += 1
 					data_row += 1
+
 		#saves and closes (add date in future)
 		workbook.save(os.path.join(scorecard_finished_file_path,('scorecard_'+ '.xlsx')))
 		workbook.close()
 
 
 function_to_export_data_testing()
-
-#Code that functions are used in
-
-#file path for raw data which is used to access each report folder with it's distinct raw data files
-# raw_data_path = os.path.expanduser(r"~\automation_scorecard\raw_data")
-
-
-# directory_list = []
-
-
-# #fetch all folders in raw_data_path 
-# for (dirpath, dirnames, filenames) in os.walk(raw_data_path):
-#     directory_list.extend(dirnames)
-   
-# #fetch all files within the folders in raw_data_path
-
-# for directory in directory_list:
-# 	raw_data_files_path = os.path.join(raw_data_path,directory)
-
-# 	for (dirpath, dirnames, filenames) in os.walk(raw_data_files_path):
-# 		raw_data_files_list = []
-# 		raw_data_files_list.extend(filenames)
-		
-# 		#this is where the function should operate, on the list of files....
-# 		#for reach directory, open a workbook. then for each csv file....ok maybe we need 2 functions here to separate the workflows
-# 		#for each csv in raw data files list, open an excel doc and export data and then at the end close.
-# 		#it will repeat for the next directory in directory_list
-
-
-# 		print raw_data_files_list
-
-
