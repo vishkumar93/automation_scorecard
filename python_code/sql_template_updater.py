@@ -8,7 +8,7 @@ import os
 sql_file_path = os.path.expanduser(r"~\automation_scorecard\sql_templates")
 sql_env = Environment(loader=FileSystemLoader(sql_file_path))
 
-sql_files = ['camp_monthly','cp_monthly','p_monthly']
+sql_files = ['camp_monthly','cp_monthly','p_monthly','placement_monthly','team_sql']
 
 config_path = os.path.expanduser(r"~\automation_scorecard\configs")
 d = []

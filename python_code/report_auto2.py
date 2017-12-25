@@ -7,7 +7,8 @@ import yaml
 import os
 
 #store all config file names in list
-jobs_path = 'C:\Python27\configs'
+
+jobs_path = os.path.expanduser(r"~\automation_scorecard\configs")
 d = []
 for (dirpath, dirnames, filenames) in os.walk(jobs_path):
     d.extend(dirnames)
@@ -20,14 +21,13 @@ def parseYaml(scorecard_config,filepath):
 
 #Apply function to configuration file
 
-
-current_file = raw_input('Enter name of current scorecard file(i.e: scorecard.csv): ')
+master_file = raw_input('Enter name of current scorecard file(i.e: scorecard.csv): ')
 raw_type = raw_input('What kind of file is this? (t,c,cp,p,pp) : ' )
 cadence = raw_input('What is the cadence? (monthly = m, quarterly = q) :')
 
 for file in filenames:
 	scorecard_dict = parseYaml(file,jobs_path)
-	sm.split(scorecard_dict,current_file,raw_type,cadence)
+	sm.split(file,scorecard_dict,master_file,raw_type,cadence)
 
 '''
 Enter paramters of config into split_master function
