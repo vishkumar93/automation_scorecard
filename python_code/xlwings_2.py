@@ -1,26 +1,18 @@
+import xlwings as xw
+import csv
+import os
 
-
-
-
-def read_csv_file(file_name):
+def read_csv_file(csv_file_name):
 	raw_data = []
-	with open(file_name,'rb') as csvfile:
+	with open(csv_file_name,'rb') as csvfile:
 		reader = csv.reader(csvfile, delimiter=',')
 		#skips header file since we don't need to copy the header in scorecard template
 		#we are leaving header in the csv file so that it easier on the end user to use the raw data
-		#must be tested (12/24/2017).
 		next(reader)
 		for row in reader:
 			raw_data.append(row)
-	return raw_data,file_name
+	return raw_data,csv_file_name
 
-raw_data_path = os.path.expanduser(r"~\automation_scorecard\raw_data")
-
-d = []
-files = []
-for (dirpath, dirnames, filenames) in os.walk(raw_data_path):
-    d.extend(dirnames)
-    break
 
 #in this second test we want the function to loop through 
 #assign existing tab to variable
@@ -31,7 +23,7 @@ def function_to_export_data_testing(raw_data_path,d):
 
 	# use directory for looping
 	for directory in d:
-	raw_data_files_path = os.path.join(raw_data_path,directory)
+		raw_data_files_path = os.path.join(raw_data_path,directory)
 	for (dirpath, dirnames, filenames) in os.walk(raw_data_files_path):
 	    files.extend(filenames)
 	    break
@@ -41,7 +33,7 @@ def function_to_export_data_testing(raw_data_path,d):
 		function_to_export_data(raw_file_path)
 
 	
-	raw_data, file_name = read_csv_file(file_name)
+	raw_data, csv_file_name = read_csv_file(file_name)
 	workbook = xw.Book(scorecard_template_path)
 	#cleaned_file_name = clean_file_name(file_name)
 
@@ -76,8 +68,31 @@ def function_to_export_data_testing(raw_data_path,d):
 		data_row += 1
 
 
-	#saves and closes using date from get_date() function
+	#saves and closes (add date in future)
 	workbook.save(os.path.join(scorecard_finished_file_path,('scorecard_'+ '.xlsx')))
 	workbook.close()
-	#closes without savings
-	#workbook.close()th
+
+
+
+
+#Code that functions are used in
+
+#file path for raw data which is used to access each report folder with it's distinct raw data files
+raw_data_path = os.path.expanduser(r"~\automation_scorecard\raw_data")
+
+
+directory_list = []
+raw_data_files_list = []
+
+#fetch all folders in raw_data_path 
+for (dirpath, dirnames, filenames) in os.walk(raw_data_path):
+    directory_list.extend(dirnames)
+   
+#fetch all files within the folders in raw_data_path
+
+for directory in directory_list:
+	raw_data_files_path = os.path.join(raw_data_path,directory)
+
+	for (dirpath, dirnames, filenames) in os.walk(raw_data_files_path):
+	    raw_data_files_list.extend(filenames)
+	    print raw_data_files_list
