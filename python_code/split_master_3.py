@@ -36,6 +36,7 @@ def split(file,config,master_file,raw_type,cadence):
 	f = open((os.path.join(excel_file_path,master_file)),'rb')
 	file = csv.reader(f)
 	#next(f) #skip header files
+	header = next(file)
 
 	#take distint list of team ids
 	for row in file:
@@ -51,6 +52,7 @@ def split(file,config,master_file,raw_type,cadence):
 
 		f = open((os.path.join(excel_file_path,master_file)),'rb')
 		file = csv.reader(f)
+
 		
 		#os.chdir("")
 		write_file_name = k + "_" + raw_type + ".csv"
@@ -59,6 +61,9 @@ def split(file,config,master_file,raw_type,cadence):
 		with open((os.path.join(write_file_path,write_file_name)),'wb') as writefile:
 			writer = csv.writer(writefile, delimiter=',')
 			
+			#below writers header into csv file
+			writer.writerow(header)
+
 			for line in file:
 				for team in team_ids:
 					if str(line[0])  == str(team):
@@ -76,3 +81,7 @@ def split(file,config,master_file,raw_type,cadence):
 			
 
 	f.close()
+
+
+
+split('digitas_amex.yaml',{'digitas_amex': '30'},'sample_camp.csv','c','m')
