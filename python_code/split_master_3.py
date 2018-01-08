@@ -81,7 +81,3 @@ def split(file,config,master_file,raw_type,cadence):
 			
 
 	f.close()
-
-
-
-split('digitas_amex.yaml',{'digitas_amex': '30'},'sample_camp.csv','c','m')
