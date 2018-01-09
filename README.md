@@ -12,9 +12,17 @@ The two pieces of code that need to be run are
 
 2) report_auto2.py - this file uses split_master_3.py to allow the user to select a file from the "excel_files" folder, and split it according to all the reports in the "config" folder.
 
+
+# What Python Libraries are required?
+
+os
+yaml
+jinja2
+csv
+xlwings (Excel automation library)
+
 Notes
 1) the Raw Data will constantly be changing. Technically there is no need to store CSV's in Git. I might change it so that raw data is generated on a local file but till it's not urgent.
 
 2) xlprac.py and xlwings.py are both works in progress. This is for the ultimate goal of ditching VBA and automating report generation via Python which is faster and less complex. Xlwings is the current library of choice for working with xlsx Excel templates.
 
-3) I should add which libraries are implemented in my code somewhere here as well...
