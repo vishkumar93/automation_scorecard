@@ -1,3 +1,7 @@
 raw_data
 /python_code/*.pyc
+<<<<<<< HEAD
 *.pyc
+=======
+*.pyc
+>>>>>>> 5a6c8f714e79595c8f7c513e82c3fdcd9d810ea8
