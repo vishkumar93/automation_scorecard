@@ -1,4 +1,5 @@
-SELECT		BRAND_SAFETY.TEAM_NAME AS 'Team Name',
+SELECT		BRAND_SAFETY.TEAM_ID AS 'Team ID',
+			BRAND_SAFETY.TEAM_NAME AS 'Team Name',
 			BRAND_SAFETY.CAMPAIGN_NAME AS 'Campaign Name',
             BRAND_SAFETY.PARTNER_NAME AS 'Partner Name',
             BRAND_SAFETY.PLACEMENT_NAME AS 'Placement Name',
@@ -27,7 +28,8 @@ FROM		(
 			/******************************************************************************************
 			Brand Safety Metrics (AGG_AGENCY_BRANDSAFETY Table)
 			******************************************************************************************/
-			SELECT		LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
+			SELECT		TEAM.ID AS 'TEAM_ID',
+						LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
 						'N/A' AS 'CAMPAIGN_NAME',								
 						'N/A' AS 'PARTNER_NAME',								
 						'N/A' AS 'PLACEMENT_NAME',
@@ -83,7 +85,8 @@ LEFT JOIN	(
 			/******************************************************************************************
 			Fraud Metrics (AGG_AGENCY_FRAUD Table)
 			******************************************************************************************/
-			SELECT		LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
+			SELECT		TEAM.ID AS 'TEAM_ID',
+						LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
 						'N/A' AS 'CAMPAIGN_NAME',								
 						'N/A' AS 'PARTNER_NAME',								
 						'N/A' AS 'PLACEMENT_NAME',
@@ -117,7 +120,8 @@ LEFT JOIN	(
 			GROUP BY	1,2,3,4,5							
 			HAVING		SUM(IMPS) > 50000
             ) FRAUD
-ON			BRAND_SAFETY.TEAM_NAME = FRAUD.TEAM_NAME
+ON			BRAND_SAFETY.TEAM_ID = FRAUD.TEAM_ID
+AND			BRAND_SAFETY.TEAM_NAME = FRAUD.TEAM_NAME
 AND			BRAND_SAFETY.CAMPAIGN_NAME = FRAUD.CAMPAIGN_NAME
 AND			BRAND_SAFETY.PARTNER_NAME = FRAUD.PARTNER_NAME
 AND			BRAND_SAFETY.PLACEMENT_NAME = FRAUD.PLACEMENT_NAME
@@ -126,7 +130,8 @@ LEFT JOIN	(
 			/******************************************************************************************
 			Viewability Metrics (AGG_AGENCY_QUALITY_V3 Table)
 			******************************************************************************************/
-			SELECT		LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
+			SELECT		TEAM.ID AS 'TEAM_ID',
+						LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
 						'N/A' AS 'CAMPAIGN_NAME',								
 						'N/A' AS 'PARTNER_NAME',								
 						'N/A' AS 'PLACEMENT_NAME',
@@ -181,7 +186,8 @@ LEFT JOIN	(
 			GROUP BY	1,2,3,4,5							
 			HAVING		SUM(IMPS) > 50000
             ) VIEWABILITY
-ON			BRAND_SAFETY.TEAM_NAME = VIEWABILITY.TEAM_NAME
+ON			BRAND_SAFETY.TEAM_ID = VIEWABILITY.TEAM_ID
+AND			BRAND_SAFETY.TEAM_NAME = VIEWABILITY.TEAM_NAME
 AND			BRAND_SAFETY.CAMPAIGN_NAME = VIEWABILITY.CAMPAIGN_NAME
 AND			BRAND_SAFETY.PARTNER_NAME = VIEWABILITY.PARTNER_NAME
 AND			BRAND_SAFETY.PLACEMENT_NAME = VIEWABILITY.PLACEMENT_NAME
@@ -190,7 +196,9 @@ LEFT JOIN	(
 			/******************************************************************************************
 			Display Viewability Metrics (AGG_AGENCY_QUALITY_V3 Table)
 			******************************************************************************************/
-			SELECT		LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
+			SELECT		
+						TEAM.ID AS 'TEAM_ID',
+						LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
 						'N/A' AS 'CAMPAIGN_NAME',								
 						'N/A' AS 'PARTNER_NAME',								
 						'N/A' AS 'PLACEMENT_NAME',
@@ -226,7 +234,8 @@ LEFT JOIN	(
 			GROUP BY	1,2,3,4,5							
 			HAVING		SUM(IMPS) > 50000
             ) DISP_VIEWABILITY
-ON			BRAND_SAFETY.TEAM_NAME = DISP_VIEWABILITY.TEAM_NAME
+ON			BRAND_SAFETY.TEAM_ID = DISP_VIEWABILITY.TEAM_ID
+AND			BRAND_SAFETY.TEAM_NAME = DISP_VIEWABILITY.TEAM_NAME
 AND			BRAND_SAFETY.CAMPAIGN_NAME = DISP_VIEWABILITY.CAMPAIGN_NAME
 AND			BRAND_SAFETY.PARTNER_NAME = DISP_VIEWABILITY.PARTNER_NAME
 AND			BRAND_SAFETY.PLACEMENT_NAME = DISP_VIEWABILITY.PLACEMENT_NAME
@@ -235,7 +244,8 @@ LEFT JOIN	(
 			/******************************************************************************************
 			Video Viewability Metrics (AGG_AGENCY_QUALITY_V3 Table)
 			******************************************************************************************/
-			SELECT		LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
+			SELECT		TEAM.ID AS 'TEAM_ID',
+						LTRIM(RTRIM(TEAM.NAME)) AS 'TEAM_NAME',								
 						'N/A' AS 'CAMPAIGN_NAME',								
 						'N/A' AS 'PARTNER_NAME',								
 						'N/A' AS 'PLACEMENT_NAME',
@@ -271,7 +281,8 @@ LEFT JOIN	(
 			GROUP BY	1,2,3,4,5							
 			HAVING		SUM(IMPS) > 50000
             ) VID_VIEWABILITY
-ON			BRAND_SAFETY.TEAM_NAME = VID_VIEWABILITY.TEAM_NAME
+ON			BRAND_SAFETY.TEAM_ID = VID_VIEWABILITY.TEAM_ID
+AND			BRAND_SAFETY.TEAM_NAME = VID_VIEWABILITY.TEAM_NAME
 AND			BRAND_SAFETY.CAMPAIGN_NAME = VID_VIEWABILITY.CAMPAIGN_NAME
 AND			BRAND_SAFETY.PARTNER_NAME = VID_VIEWABILITY.PARTNER_NAME
 AND			BRAND_SAFETY.PLACEMENT_NAME = VID_VIEWABILITY.PLACEMENT_NAME

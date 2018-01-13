@@ -46,6 +46,8 @@ def function_to_export_data_testing():
 		
 			#cleaned_file_name = clean_file_name(file_name)
 
+			#raw data files below need to have campaign, partner, cp, or team appended in the name! Otherwise, the object sheet won't get assigned
+
 				if 'campaign' in raw_data_file:
 					sheet = workbook.sheets['Campaign']
 				elif 'partner' in raw_data_file:
@@ -77,7 +79,7 @@ def function_to_export_data_testing():
 					data_row += 1
 
 		#saves and closes (add date in future)
-		workbook.save(os.path.join(scorecard_finished_file_path,('scorecard_'+ '.xlsx')))
+		workbook.save(os.path.join(scorecard_finished_file_path,(csv_file_name.replace('.csv','') + '.xlsx')))
 		workbook.close()
 
 

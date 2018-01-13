@@ -25,9 +25,10 @@ master_file = raw_input('Enter name of current scorecard file(i.e: scorecard.csv
 raw_type = raw_input('What kind of file is this? (t,c,cp,p,pp) : ' )
 cadence = raw_input('What is the cadence? (monthly = m, quarterly = q) :')
 
-for file in filenames:
-	scorecard_dict = parseYaml(file,jobs_path)
-	sm.split(file,scorecard_dict,master_file,raw_type,cadence)
+for d in dirnames:
+	for file in filenames:
+		scorecard_dict = parseYaml(file,jobs_path)
+		sm.split(file,scorecard_dict,master_file,raw_type,cadence)
 
 '''
 Enter paramters of config into split_master function
